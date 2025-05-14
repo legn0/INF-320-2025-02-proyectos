@@ -17,7 +17,7 @@ public partial class MainPage : ContentPage
 
 	public void OnTipPercentageSliderValueChanged(object sender, ValueChangedEventArgs e){
 		viewModel.OnTipPercentageSliderValueChanged((int)e.NewValue); 
-        // Se incuye el int para realizar el cambio de tipo, pues se recibe un double
+        // Se incluye el int para realizar el cambio de tipo, pues se recibe un double
 	}
 
 
@@ -45,7 +45,7 @@ public class IntToStringConverter : IValueConverter
     }
 
     //Se incluyeron los signos "?" para evitar lanzamiento de warnings debido a posible valor null recibido 
-    //(no deberia ocurrir, pero la función está adaptada para recibir ese caso tambien)
+    //(no deberia ocurrir, pero la función Convert() está adaptada para recibir ese caso tambien)
 }
 
 
