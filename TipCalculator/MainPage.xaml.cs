@@ -15,16 +15,18 @@ public partial class MainPage : ContentPage
 		BindingContext = viewModel;
 	}
 
-	private void OnTipPercentageSliderValueChanged(object sender, ValueChangedEventArgs e){
-		viewModel.TipPercentageSliderValueChanged(e.NewValue);
+	public void OnTipPercentageSliderValueChanged(object sender, ValueChangedEventArgs e){
+		viewModel.OnTipPercentageSliderValueChanged((int)e.NewValue); 
+        // Se incuye el int para realizar el cambio de tipo, pues se recibe un double
 	}
+
 
 	
 }
 
 public class IntToStringConverter : IValueConverter
 {
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
         if (value is int intValue)
         {
@@ -33,7 +35,7 @@ public class IntToStringConverter : IValueConverter
         return "0";
     }
 
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
         if (value is string stringValue && int.TryParse(stringValue, out int result))
         {
@@ -41,6 +43,9 @@ public class IntToStringConverter : IValueConverter
         }
         return 0;
     }
+
+    //Se incluyeron los signos "?" para evitar lanzamiento de warnings debido a posible valor null recibido 
+    //(no deberia ocurrir, pero la función está adaptada para recibir ese caso tambien)
 }
 
 
