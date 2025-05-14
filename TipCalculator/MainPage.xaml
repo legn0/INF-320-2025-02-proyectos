@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:TipCalculator"
+             x:Class="TipCalculator.MainPage">
+     <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:IntToStringConverter x:Key="IntToStringConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="30,0"
+            Spacing="25">
+
+                <!-- Totales -->
+                <Label Text="Total por Persona" SemanticProperties.HeadingLevel="Level2"/>
+                <Label Text="{Binding PerPersonTotal}" x:Name="TotalPersona" SemanticProperties.HeadingLevel="Level3"/>
+                <Label Text="Subtotal por Persona" SemanticProperties.HeadingLevel="Level2"/>
+                <Label Text="{Binding SubTotal}" x:Name="SubTotalPersona" SemanticProperties.HeadingLevel="Level3"/>
+                <!-- <Label Text="Porcentaje Propina" SemanticProperties.HeadingLevel="Level2"/>
+                <Label Text="{Binding TipPercentage}" x:Name="TipPercentage" SemanticProperties.HeadingLevel="Level3"/> -->
+                <Label Text="Propina"  SemanticProperties.HeadingLevel="Level2"/>
+                <Label Text="{Binding Tip}" x:Name="Tip" SemanticProperties.HeadingLevel="Level3"/>
+                
+                <!-- Boleta -->
+                <Entry 
+                    Text="{Binding Bill, Converter={StaticResource IntToStringConverter}, Mode=TwoWay}"
+                    Keyboard="Numeric"/>
+
+                <!-- Botones porcentaje -->
+                <Label
+                Text="Elige Propina: "
+                SemanticProperties.HeadingLevel="Level3" />
+                <HorizontalStackLayout>
+                    <Button
+                        x:Name="TenPercentButton"
+                        Text="10%" 
+                        Command="{Binding OnTenPercentTipCommand}"/>
+                    <Button
+                        x:Name="FifteenPercentButton"
+                        Text="10%" 
+                        Command="{Binding OnFifteenPercentTipCommand}"/>
+                    <Button
+                        x:Name="TwentyPercentButton"
+                        Text="10%" 
+                        Command="{Binding OnTwentyPercentTipCommand}"/>
+
+                </HorizontalStackLayout>
+                
+                <!-- Slider porcentaje -->
+                <Label
+                Text="Propina: "
+                SemanticProperties.HeadingLevel="Level3" />
+                <Slider 
+                    x:Name="TipSlider" 
+                    Minimum="0" Maximum="50"  
+                    Value="{Binding TipPercentage}" 
+                    ValueChanged="OnTipPercentageSliderValueChanged"/>
+                <!-- contador personas -->
+
+                <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,Auto,Auto">
+                    <!-- Decrease Button -->
+                    <Button 
+                        Grid.Column="0"
+                        Text="-"
+                        Command="{Binding OnDecreaseAmountOfPeopleCommand}"
+                        IsEnabled="{Binding CanDecrement}" />
+
+                    <!-- Value Display -->
+                    <Label 
+                        Grid.Column="1"
+                        Text="{Binding AmountOfPeople}"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        Margin="10,0" />
+
+                    <!-- Increase Button -->
+                    <Button 
+                        Grid.Column="2"
+                        Text="+"
+                        Command="{Binding OnIncreaseAmountOfPeopleCommand}" />
+                </Grid>
+<!-- 
+                <Label
+                Text="Red Value:"
+                SemanticProperties.HeadingLevel="Level3" />
+                <Slider Maximum="255" x:Name="RedSlider" ValueChanged="onRedSliderChanged" Minimum="0"/>
+
+                <Label
+                Text="Green Value:"
+                SemanticProperties.HeadingLevel="Level3" />
+                <Slider Maximum="255" x:Name="GreenSlider" ValueChanged="onGreenSliderChanged" Minimum="0"/>
+
+                <Label
+                Text="Blue Value:"
+                SemanticProperties.HeadingLevel="Level3" />
+                <Slider Maximum="255" x:Name="BlueSlider" ValueChanged="onBlueSliderChanged" Minimum="0"/>
+
+
+                <Rectangle x:Name="ColorRectangle" ScaleY="35"/>
+
+                <Label Text="#000000" x:Name="HexLabel"/>
+                <Button x:Name="CopyToClipboard"
+                    Clicked="onCopyToClipboard"
+                    Text="Copy Color to Clipboard"/>
+                
+                <Button
+                x:Name="RandomColorBtn"
+                Text="Generate Random Color" 
+                Clicked="OnGenerateRandomColor"
+                HorizontalOptions="Fill" /> -->
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
