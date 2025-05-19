@@ -15,6 +15,9 @@
 		<OutputType>Exe</OutputType>
 		<RootNamespace>TipCalculator</RootNamespace>
 		<UseMaui>true</UseMaui>
+		<EnableRoslynAnalyzers>true</EnableRoslynAnalyzers>
+		<EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+
 		<SingleProject>true</SingleProject>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>

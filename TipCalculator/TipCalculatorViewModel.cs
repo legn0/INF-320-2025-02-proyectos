@@ -7,14 +7,20 @@ public partial class TipCalculatorViewModel : ObservableObject
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(PerPersonTotal))]
     [NotifyPropertyChangedFor(nameof(SubTotal))]
+    [NotifyPropertyChangedFor(nameof(SubTotalFormatted))]
     [NotifyPropertyChangedFor(nameof(Tip))]
+    [NotifyPropertyChangedFor(nameof(TipFormatted))]
     private float _bill;
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(PerPersonTotal))]
     [NotifyPropertyChangedFor(nameof(SubTotal))]
+    [NotifyPropertyChangedFor(nameof(SubTotalFormatted))]
     [NotifyPropertyChangedFor(nameof(Tip))]
+    [NotifyPropertyChangedFor(nameof(TipFormatted))]
+    [NotifyPropertyChangedFor(nameof(TipPercentageFormatted))]
     private int _tipPercentage;
+
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(PerPersonTotal))]
@@ -79,4 +85,10 @@ public partial class TipCalculatorViewModel : ObservableObject
         AmountOfPeople--;
         UpdateCanDecrement();
     }
+
+    public string SubTotalFormatted => $"${SubTotal:F2}";
+    public string TipFormatted => $"${Tip:F2}";
+    public string TipPercentageFormatted => $"{TipPercentage}%";
+
 }
+// SE PUEDE COMPRIMIR MÁS
