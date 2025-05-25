@@ -16,7 +16,7 @@
             <!-- Boleta -->
             <Label Text="Precio Total de la Compra: " SemanticProperties.HeadingLevel="Level2"/>
             <Entry 
-                Text="{Binding Bill, Converter={StaticResource IntToStringConverter}, Mode=TwoWay}"
+                Text="{Binding Bill, Mode=TwoWay}"
                 Keyboard="Numeric"
                 FontSize="Medium"
             />
@@ -25,16 +25,16 @@
             <!-- Totales -->
             <!-- <Label Text="{Binding PerPersonTotal}" x:Name="TotalPersona" SemanticProperties.HeadingLevel="Level3"/> -->
 
-            <Label Text="Subtotal por Persona: " SemanticProperties.HeadingLevel="Level2"/>
-            <Label Text="{Binding SubTotalFormatted}" x:Name="SubTotalPersona" SemanticProperties.HeadingLevel="Level3"/>
+            <Label Text="Total por Persona: " SemanticProperties.HeadingLevel="Level2"/>
+            <Label Text="{Binding PerPersonTotalFormatted}" x:Name="PerPersonTotal" SemanticProperties.HeadingLevel="Level3"/>
 
             <!--
             <Label Text="Porcentaje Propina: " SemanticProperties.HeadingLevel="Level2"/>
             <Label Text="{Binding TipPercentageFormatted}" x:Name="TipPercentage" SemanticProperties.HeadingLevel="Level3"/>
             -->
 
-            <Label Text="Monto Propina por Persona: " SemanticProperties.HeadingLevel="Level2"/>
-            <Label Text="{Binding TipFormatted}" x:Name="Tip" SemanticProperties.HeadingLevel="Level3"/>
+            <Label Text="SubTotal por Persona: " SemanticProperties.HeadingLevel="Level2"/>
+            <Label Text="{Binding SubTotalFormatted}" x:Name="SubTotal" SemanticProperties.HeadingLevel="Level3"/>
 
                 
 
@@ -57,9 +57,9 @@
                     Text="20%" 
                     Command="{Binding OnTwentyPercentTipCommand}"/>
                 -->
-                <Button Text="10%" Command="{Binding OnTenPercentTipCommand}" />
-                <Button Text="15%" Command="{Binding OnFifteenPercentTipCommand}" />
-                <Button Text="20%" Command="{Binding OnTwentyPercentTipCommand}" />
+                <Button Text="10%" Command="{Binding TenPercentTipCommand}" />
+                <Button Text="15%" Command="{Binding FifteenPercentTipCommand}" />
+                <Button Text="20%" Command="{Binding TwentyPercentTipCommand}" />
 
             </HorizontalStackLayout>
                 
@@ -84,7 +84,7 @@
                 <Button 
                     Grid.Column="0"
                     Text="-"
-                    Command="{Binding OnDecreaseAmountOfPeopleCommand}"
+                    Command="{Binding DecreaseAmountOfPeopleCommand}"
                     IsEnabled="{Binding CanDecrement}" />
                 <!-- Value Display -->
                 <Label 
@@ -97,7 +97,7 @@
                 <Button 
                     Grid.Column="2"
                     Text="+"
-                    Command="{Binding OnIncreaseAmountOfPeopleCommand}" />
+                    Command="{Binding IncreaseAmountOfPeopleCommand}" />
             </Grid>
 
         </VerticalStackLayout>

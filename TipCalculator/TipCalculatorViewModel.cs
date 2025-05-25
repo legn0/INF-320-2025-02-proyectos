@@ -6,6 +6,7 @@ public partial class TipCalculatorViewModel : ObservableObject
 {
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(PerPersonTotal))]
+    [NotifyPropertyChangedFor(nameof(PerPersonTotalFormatted))]
     [NotifyPropertyChangedFor(nameof(SubTotal))]
     [NotifyPropertyChangedFor(nameof(SubTotalFormatted))]
     [NotifyPropertyChangedFor(nameof(Tip))]
@@ -14,6 +15,7 @@ public partial class TipCalculatorViewModel : ObservableObject
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(PerPersonTotal))]
+    [NotifyPropertyChangedFor(nameof(PerPersonTotalFormatted))]
     [NotifyPropertyChangedFor(nameof(SubTotal))]
     [NotifyPropertyChangedFor(nameof(SubTotalFormatted))]
     [NotifyPropertyChangedFor(nameof(Tip))]
@@ -24,8 +26,12 @@ public partial class TipCalculatorViewModel : ObservableObject
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(PerPersonTotal))]
+    [NotifyPropertyChangedFor(nameof(PerPersonTotalFormatted))]
     [NotifyPropertyChangedFor(nameof(SubTotal))]
+    [NotifyPropertyChangedFor(nameof(SubTotalFormatted))]
     [NotifyPropertyChangedFor(nameof(Tip))]
+    [NotifyPropertyChangedFor(nameof(TipFormatted))]
+    [NotifyPropertyChangedFor(nameof(CanDecrement))]
     private int _amountOfPeople;
 
     [ObservableProperty]
@@ -34,18 +40,22 @@ public partial class TipCalculatorViewModel : ObservableObject
     //PONERLE OBSERVABLE PROPERTY Y LESERO
     ///
     public float PerPersonTotal => (Bill+(Bill*TipPercentage/100))/AmountOfPeople;
-    public float SubTotal => Bill+(Bill*TipPercentage/100);
+    public float SubTotal => Bill/AmountOfPeople;
     public float Tip => Bill*TipPercentage/100;
 
-    public TipCalculatorViewModel(){ 
+    public TipCalculatorViewModel()
+    {
         _bill = 0;
         _tipPercentage = 10;
         _amountOfPeople = 1;
+        UpdateCanDecrement();
+        Console.WriteLine("🟢 TipCalculatorViewModel iniciado");
     }
 
     [RelayCommand]
-    public void OnBillChanged(int value){
-        Bill = value;
+    public void OnBillChanged(int value)
+    {
+        Console.WriteLine($"Nuevo Bill: {value}");
     }
 
     [RelayCommand]
@@ -78,6 +88,7 @@ public partial class TipCalculatorViewModel : ObservableObject
     public void OnIncreaseAmountOfPeople(){
         AmountOfPeople++;
         UpdateCanDecrement();
+        Console.WriteLine($"People: {AmountOfPeople}");
     }
 
     [RelayCommand]
@@ -86,6 +97,7 @@ public partial class TipCalculatorViewModel : ObservableObject
         UpdateCanDecrement();
     }
 
+    public string PerPersonTotalFormatted => $"${PerPersonTotal:F2}";
     public string SubTotalFormatted => $"${SubTotal:F2}";
     public string TipFormatted => $"${Tip:F2}";
     public string TipPercentageFormatted => $"{TipPercentage}%";
