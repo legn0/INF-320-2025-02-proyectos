@@ -21,6 +21,8 @@ dotnet build -t:Run -f net8.0-android -p:AndroidDevice=emulator-5554
 ```
 C:\AndroidSDK\platform-tools
 .\adb.exe devices -l
+.\adb.exe devices -l
+#El comando se ejecuta 2 veces para identificar y levantar el emulador
 ```
 
 *Aviso:* El programa puede tardar en ejecutarse.
