@@ -13,94 +13,87 @@
     <ScrollView>
         <VerticalStackLayout Padding="30,0" Spacing="25">
 
-            <!-- Boleta -->
-            <Label Text="Precio Total de la Compra: " SemanticProperties.HeadingLevel="Level2"/>
-            <Entry 
-                Text="{Binding Bill, Mode=TwoWay}"
-                Keyboard="Numeric"
-                FontSize="Medium"
-            />
-            <!-- REVISAR Funcionalidad, al ingresar nuevos datos el monto se sobreescribe incorrectamente  --> 
-                
             <!-- Totales -->
-            <!-- <Label Text="{Binding PerPersonTotal}" x:Name="TotalPersona" SemanticProperties.HeadingLevel="Level3"/> -->
+            <Frame BackgroundColor="#f0f0f0" Padding="10" CornerRadius="10">
+                <Grid ColumnDefinitions="*,Auto" VerticalOptions="Center">
 
-            <Label Text="Total por Persona: " SemanticProperties.HeadingLevel="Level2"/>
-            <Label Text="{Binding PerPersonTotalFormatted}" x:Name="PerPersonTotal" SemanticProperties.HeadingLevel="Level3"/>
+                    <!-- Valores a la IZQUIERDA del Grid: -->
+                    <VerticalStackLayout Grid.Column="0" HorizontalOptions="Start">
+                        <Label 
+                            Text="Total P/Persona: "
+                            SemanticProperties.HeadingLevel="Level2" 
+                            FontAttributes="Bold"
+                            HorizontalOptions="Start" />
+                        <Label 
+                            Text="{Binding PerPersonTotalFormatted}" 
+                            FontSize="32" 
+                            FontAttributes="Bold"
+                            HorizontalOptions="Start" />
+                    </VerticalStackLayout>
 
-            <!--
-            <Label Text="Porcentaje Propina: " SemanticProperties.HeadingLevel="Level2"/>
-            <Label Text="{Binding TipPercentageFormatted}" x:Name="TipPercentage" SemanticProperties.HeadingLevel="Level3"/>
-            -->
+                    <!-- Valores a la DERECHA del Grid: -->
+                    <VerticalStackLayout Grid.Column="1" HorizontalOptions="End" VerticalOptions="Center" Spacing="10">
+                        <Label Text="{Binding SubTotalText}" FontSize="12" HorizontalOptions="End"/>
+                        <Label Text="{Binding TipPercentageText}" FontSize="12" HorizontalOptions="End"/>
+                    </VerticalStackLayout>
+                    
+                </Grid>
+            </Frame>
 
-            <Label Text="SubTotal por Persona: " SemanticProperties.HeadingLevel="Level2"/>
-            <Label Text="{Binding SubTotalFormatted}" x:Name="SubTotal" SemanticProperties.HeadingLevel="Level3"/>
 
-                
+            <!-- Boleta -->
+            <Label Text="Valor Boleta: " SemanticProperties.HeadingLevel="Level2"/>
+            <Entry 
+            Text="{Binding Bill, Mode=TwoWay}"
+            Keyboard="Numeric"
+            FontSize="Medium" />
 
             <!-- Botones porcentaje -->
             <Label
-            Text="Porcentaje de Propina: "
-            SemanticProperties.HeadingLevel="Level3" />
-            <HorizontalStackLayout Spacing="10">
-                <!--
-                <Button
-                    x:Name="TenPercentButton"
-                    Text="10%" 
-                    Command="{Binding OnTenPercentTipCommand}"/>
-                <Button
-                    x:Name="FifteenPercentButton"
-                    Text="15%" 
-                    Command="{Binding OnFifteenPercentTipCommand}"/>
-                <Button
-                    x:Name="TwentyPercentButton"
-                    Text="20%" 
-                    Command="{Binding OnTwentyPercentTipCommand}"/>
-                -->
+            Text="Elige Propina: "
+            SemanticProperties.HeadingLevel="Level2" />
+            <HorizontalStackLayout Spacing="5">
                 <Button Text="10%" Command="{Binding TenPercentTipCommand}" />
                 <Button Text="15%" Command="{Binding FifteenPercentTipCommand}" />
                 <Button Text="20%" Command="{Binding TwentyPercentTipCommand}" />
-
             </HorizontalStackLayout>
                 
             <!-- Slider porcentaje -->
             <Label 
-            Text="Porcentaje personalizado de Propina:"
+            Text="{Binding TipPercentageFullText}" 
             SemanticProperties.HeadingLevel="Level2" />
             <Slider
-                Minimum="0"
-                Maximum="100"
-                Value="{Binding TipPercentage, Mode=TwoWay}" />
-            <Label
-            Text="{Binding TipPercentageFormatted}"
-            SemanticProperties.HeadingLevel="Level3"/>
+            Minimum="0"
+            Maximum="50"
+            Value="{Binding TipPercentage, Mode=TwoWay}" />
+            
 
             <!-- Contador personas -->
-            <Label
-            Text="Indique la cantidad de Personas: "
-            SemanticProperties.HeadingLevel="Level3" />
-            <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,Auto,Auto">
-                <!-- Decrease Button -->
-                <Button 
-                    Grid.Column="0"
-                    Text="-"
-                    Command="{Binding DecreaseAmountOfPeopleCommand}"
-                    IsEnabled="{Binding CanDecrement}" />
-                <!-- Value Display -->
-                <Label 
-                    Grid.Column="1"
-                    Text="{Binding AmountOfPeople}"
+            <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,20,Auto">
+
+                <Label
+                Grid.Column="0"
+                Text="Dividir el total: "
+                HorizontalOptions="Center"
+                VerticalOptions="Center" />
+
+                <!-- Columna 1 vacía (equivalente a un espaciador de 20px definido en el grid) -->
+
+                <Grid Grid.Column="2"
+                    RowDefinitions="Auto"
+                    ColumnDefinitions="Auto,Auto,Auto"
                     HorizontalOptions="Center"
-                    VerticalOptions="Center"
-                    Margin="10,0" />
-                <!-- Increase Button -->
-                <Button 
-                    Grid.Column="2"
-                    Text="+"
-                    Command="{Binding IncreaseAmountOfPeopleCommand}" />
+                    VerticalOptions="Center">
+                    <!-- Decrease Button -->
+                    <Button Grid.Column="0" Text="-" Command="{Binding DecreaseAmountOfPeopleCommand}" IsEnabled="{Binding CanDecrement}" VerticalOptions="Center" />
+                    <!-- Value Display -->
+                    <Label Grid.Column="1" Text="{Binding AmountOfPeople}" HorizontalOptions="Center" VerticalOptions="Center" Margin="10,0" />
+                    <!-- Increase Button -->
+                    <Button Grid.Column="2" Text="+" Command="{Binding IncreaseAmountOfPeopleCommand}" VerticalOptions="Center" />
+                </Grid>
+
             </Grid>
 
         </VerticalStackLayout>
     </ScrollView>
-
 </ContentPage>

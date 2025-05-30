@@ -9,6 +9,7 @@ public partial class TipCalculatorViewModel : ObservableObject
     [NotifyPropertyChangedFor(nameof(PerPersonTotalFormatted))]
     [NotifyPropertyChangedFor(nameof(SubTotal))]
     [NotifyPropertyChangedFor(nameof(SubTotalFormatted))]
+    [NotifyPropertyChangedFor(nameof(SubTotalText))]
     [NotifyPropertyChangedFor(nameof(Tip))]
     [NotifyPropertyChangedFor(nameof(TipFormatted))]
     private float _bill;
@@ -18,30 +19,35 @@ public partial class TipCalculatorViewModel : ObservableObject
     [NotifyPropertyChangedFor(nameof(PerPersonTotalFormatted))]
     [NotifyPropertyChangedFor(nameof(SubTotal))]
     [NotifyPropertyChangedFor(nameof(SubTotalFormatted))]
+    [NotifyPropertyChangedFor(nameof(SubTotalText))]
     [NotifyPropertyChangedFor(nameof(Tip))]
     [NotifyPropertyChangedFor(nameof(TipFormatted))]
     [NotifyPropertyChangedFor(nameof(TipPercentageFormatted))]
-    private int _tipPercentage;
+    [NotifyPropertyChangedFor(nameof(TipPercentageText))]
+    [NotifyPropertyChangedFor(nameof(TipPercentageFullText))]
 
+    private int _tipPercentage;
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(PerPersonTotal))]
     [NotifyPropertyChangedFor(nameof(PerPersonTotalFormatted))]
     [NotifyPropertyChangedFor(nameof(SubTotal))]
     [NotifyPropertyChangedFor(nameof(SubTotalFormatted))]
+    [NotifyPropertyChangedFor(nameof(SubTotalText))]
     [NotifyPropertyChangedFor(nameof(Tip))]
     [NotifyPropertyChangedFor(nameof(TipFormatted))]
     [NotifyPropertyChangedFor(nameof(CanDecrement))]
     private int _amountOfPeople;
+
 
     [ObservableProperty]
     private bool _canDecrement;
 
     //PONERLE OBSERVABLE PROPERTY Y LESERO
     ///
-    public float PerPersonTotal => (Bill+(Bill*TipPercentage/100))/AmountOfPeople;
-    public float SubTotal => Bill/AmountOfPeople;
-    public float Tip => Bill*TipPercentage/100;
+    public float PerPersonTotal => (Bill + (Bill * TipPercentage / 100)) / AmountOfPeople;
+    public float SubTotal => Bill / AmountOfPeople;
+    public float Tip => Bill * TipPercentage / 100;
 
     public TipCalculatorViewModel()
     {
@@ -59,22 +65,26 @@ public partial class TipCalculatorViewModel : ObservableObject
     }
 
     [RelayCommand]
-    public void OnTenPercentTip(){
+    public void OnTenPercentTip()
+    {
         TipPercentage = 10;
     }
 
     [RelayCommand]
-    public void OnFifteenPercentTip(){
+    public void OnFifteenPercentTip()
+    {
         TipPercentage = 15;
     }
 
     [RelayCommand]
-    public void OnTwentyPercentTip(){
+    public void OnTwentyPercentTip()
+    {
         TipPercentage = 20;
     }
 
     [RelayCommand]
-    public void OnTipPercentageSliderValueChanged(int value){
+    public void OnTipPercentageSliderValueChanged(int value)
+    {
         TipPercentage = value;
     }
 
@@ -82,17 +92,19 @@ public partial class TipCalculatorViewModel : ObservableObject
     private void UpdateCanDecrement()
     {
         CanDecrement = AmountOfPeople > 1;
-     }
+    }
 
     [RelayCommand]
-    public void OnIncreaseAmountOfPeople(){
+    public void OnIncreaseAmountOfPeople()
+    {
         AmountOfPeople++;
         UpdateCanDecrement();
         Console.WriteLine($"People: {AmountOfPeople}");
     }
 
     [RelayCommand]
-    public void OnDecreaseAmountOfPeople(){
+    public void OnDecreaseAmountOfPeople()
+    {
         AmountOfPeople--;
         UpdateCanDecrement();
     }
@@ -101,6 +113,10 @@ public partial class TipCalculatorViewModel : ObservableObject
     public string SubTotalFormatted => $"${SubTotal:F2}";
     public string TipFormatted => $"${Tip:F2}";
     public string TipPercentageFormatted => $"{TipPercentage}%";
+
+    public string SubTotalText => $"SubTotal: {SubTotalFormatted}";
+    public string TipPercentageText => $"Propina: {TipPercentageFormatted}";
+    public string TipPercentageFullText => $"Propina Personalizada: {TipPercentageFormatted}";
 
 }
 // SE PUEDE COMPRIMIR MÁS
