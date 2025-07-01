@@ -1,5 +1,5 @@
-﻿using GastosApp.Services;
-using GastosApp.ViewModels; // Add this line if MainViewModel is in the ViewModels namespace
+using GastosApp.Services;
+using GastosApp.ViewModels;
 
 namespace GastosApp;
 
@@ -18,6 +18,8 @@ public static class MauiProgram
 		builder.Services.AddSingleton<DatabaseService>();
 		builder.Services.AddSingleton<MainPage>();
 		builder.Services.AddSingleton<MainViewModel>();
+		builder.Services.AddSingleton<HomePage>();
+		builder.Services.AddSingleton<HomeViewModel>();
 
 		return builder.Build();
 	}

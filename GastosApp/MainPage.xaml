@@ -7,44 +7,24 @@
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="15">
 
-            <!-- Descripción a ingresar -->
             <Entry Placeholder="Glosa" Text="{Binding Glosa}" />
 
-            <!-- Monto a ingresar -->
             <Entry Placeholder="Monto" Text="{Binding Monto}" Keyboard="Numeric" />
 
-            <!-- Fecha a ingresar -->
             <DatePicker Date="{Binding Fecha}" />
 
-            <!-- Casilla Check -->
             <Grid ColumnDefinitions="*,Auto">
                 <Label Text="¿Es ingreso?" VerticalOptions="Center" />
                 <CheckBox IsChecked="{Binding EsIngreso}" Grid.Column="1" />
             </Grid>
 
-            <!-- Botón Agregar Transacción -->
             <Button Text="Guardar" Command="{Binding AgregarCommand}" />
 
-            <!-- Botón Cancelar -->
             <Button Text="Cancelar"
                 BackgroundColor="Red"
                 TextColor="White"
                 Command="{Binding CancelarCommand}" 
             />
-
-            <!-- Historial -->
-            <CollectionView ItemsSource="{Binding Transacciones}">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <StackLayout Padding="10" BackgroundColor="#f0f0f0" Margin="5">
-                            <Label Text="{Binding Glosa}" FontAttributes="Bold" />
-                            <Label Text="{Binding Monto}" />
-                            <Label Text="{Binding Fecha, StringFormat='{0:dd/MM/yyyy}'}" />
-                            <Label Text="{Binding EsIngreso, StringFormat='Tipo: {0}'}" />
-                        </StackLayout>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
 
         </VerticalStackLayout>
     </ScrollView>

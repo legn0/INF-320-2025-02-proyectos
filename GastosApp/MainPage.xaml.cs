@@ -9,7 +9,7 @@ public partial class MainPage : ContentPage
         InitializeComponent();
         BindingContext = viewModel;
 
-        // Sección para habilitar las alertas en la app en relación al formulario de transacciones.
+        // Alerta de transacciones!!
         viewModel.MostrarAlerta = async (titulo, mensaje, boton) =>
         {
             await DisplayAlert(titulo, mensaje, boton);
