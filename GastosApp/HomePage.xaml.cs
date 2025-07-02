@@ -1,18 +1,28 @@
+using GastosApp.Services;
 using GastosApp.ViewModels;
 
 namespace GastosApp;
 
 public partial class HomePage : ContentPage
 {
-    public HomePage(HomeViewModel vm)
+    private readonly DatabaseService _databaseService;
+
+    public HomePage(HomeViewModel vm, DatabaseService databaseService)
     {
         InitializeComponent();
         BindingContext = vm;
+        _databaseService = databaseService;
     }
 
-    protected override void OnAppearing()
+    protected override async void OnAppearing()
     {
         base.OnAppearing();
         (BindingContext as HomeViewModel)?.CargarDatos();
+
+        string userName = await _databaseService.GetSettingAsync("UserName");
+        if (!string.IsNullOrEmpty(userName))
+        {
+            UserNameLabel.Text = $"Hola, {userName}!";
+        }
     }
 }
