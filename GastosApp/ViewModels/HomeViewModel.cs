@@ -13,6 +13,7 @@ public class HomeViewModel : INotifyPropertyChanged
     private double _balance;
     private double _ingresos;
     private double _egresos;
+    private string _userName;
 
     public ObservableCollection<Transaccion> Transacciones { get; set; } = new();
     public ICommand NavegarANuevaTransaccionCommand { get; }
@@ -35,10 +36,17 @@ public class HomeViewModel : INotifyPropertyChanged
         set { _egresos = value; OnPropertyChanged(); }
     }
 
+    public string UserName
+    {
+        get => _userName;
+        set { _userName = value; OnPropertyChanged(); }
+    }
+
     public HomeViewModel(DatabaseService db)
     {
         _db = db;
         NavegarANuevaTransaccionCommand = new Command(async () => await NavegarANuevaTransaccion());
+        LoadUserName();
     }
 
     public void CargarDatos()
@@ -47,8 +55,6 @@ public class HomeViewModel : INotifyPropertyChanged
         {
             var transacciones = await _db.GetTransaccionesAsync();
             if (App.Current != null)
-            {
-                if (App.Current != null)
             {
                 App.Current.Dispatcher.Dispatch(() =>
                 {
@@ -60,8 +66,18 @@ public class HomeViewModel : INotifyPropertyChanged
                     CalcularBalance();
                 });
             }
-            }
         });
+    }
+
+    private async void LoadUserName()
+    {
+        UserName = await _db.GetSettingAsync("UserName") ?? "Usuario";
+    }
+
+    public async Task UpdateUserName(string newName)
+    {
+        UserName = newName;
+        await _db.SaveSettingAsync("UserName", newName);
     }
 
     private void CalcularBalance()
