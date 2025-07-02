@@ -13,7 +13,7 @@ public class HomeViewModel : INotifyPropertyChanged
     private double _balance;
     private double _ingresos;
     private double _egresos;
-    private string _userName;
+    private string _userName = string.Empty;
 
     public ObservableCollection<Transaccion> Transacciones { get; set; } = new();
     public ICommand NavegarANuevaTransaccionCommand { get; }
