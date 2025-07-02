@@ -7,19 +7,24 @@
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="15">
 
+            <!-- Glosa/Descripción -->
             <Entry Placeholder="Glosa" Text="{Binding Glosa}" />
 
+            <!-- Monto a ingresar -->
             <Entry Placeholder="Monto" Text="{Binding Monto}" Keyboard="Numeric" />
-
+            
+            <!-- Casilla para elegir Fecha -->
             <DatePicker Date="{Binding Fecha}" />
 
+            <!-- Casilla Check Ingreso -->
             <Grid ColumnDefinitions="*,Auto">
                 <Label Text="¿Es ingreso?" VerticalOptions="Center" />
                 <CheckBox IsChecked="{Binding EsIngreso}" Grid.Column="1" />
             </Grid>
 
+            <!-- Botón para confirmar -->
             <Button Text="Guardar" Command="{Binding AgregarCommand}" />
-
+            <!-- Botón para cancelar -->
             <Button Text="Cancelar"
                 BackgroundColor="Red"
                 TextColor="White"

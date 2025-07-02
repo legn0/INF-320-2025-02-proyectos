@@ -9,7 +9,7 @@ public partial class MainPage : ContentPage
         InitializeComponent();
         BindingContext = viewModel;
 
-        // Alerta de transacciones!!
+        // Manejo de alertas(pop-up) para las transacciones
         viewModel.MostrarAlerta = async (titulo, mensaje, boton) =>
         {
             await DisplayAlert(titulo, mensaje, boton);

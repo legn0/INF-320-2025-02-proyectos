@@ -8,49 +8,58 @@ namespace GastosApp.ViewModels;
 
 public class MainViewModel : INotifyPropertyChanged
 {
+    //---------------------------------------------------------------------------------------
+    //---------------------------------------------------------------------------------------
     public Action<string, string, string>? MostrarAlerta;
     private readonly DatabaseService _db;
     private string _glosa = string.Empty;
     private string _monto = string.Empty;
     private DateTime _fecha = DateTime.Today;
     private bool _esIngreso;
-
+    //---------------------------------------------------------------------------------------
+    //---------------------------------------------------------------------------------------
     public string Glosa
     {
         get => _glosa;
         set { _glosa = value; OnPropertyChanged(); }
     }
-
+    //---------------------------------------------------------------------------------------
+    //---------------------------------------------------------------------------------------
     public string Monto
     {
         get => _monto;
         set { _monto = value; OnPropertyChanged(); }
     }
-
+    //---------------------------------------------------------------------------------------
+    //---------------------------------------------------------------------------------------
     public DateTime Fecha
     {
         get => _fecha;
         set { _fecha = value; OnPropertyChanged(); }
     }
-
+    //---------------------------------------------------------------------------------------
+    //---------------------------------------------------------------------------------------
     public bool EsIngreso
     {
         get => _esIngreso;
         set { _esIngreso = value; OnPropertyChanged(); }
     }
-
+    //---------------------------------------------------------------------------------------
+    //---------------------------------------------------------------------------------------
     public ICommand AgregarCommand { get; }
     public ICommand CancelarCommand { get; }
 
     public event PropertyChangedEventHandler? PropertyChanged;
-
+    //---------------------------------------------------------------------------------------
+    //---------------------------------------------------------------------------------------
     public MainViewModel(DatabaseService db)
-    { 
+    {
         _db = db;
         AgregarCommand = new Command(async () => await AgregarTransaccion());
         CancelarCommand = new Command(async () => await CancelarTransaccion());
     }
-
+    //---------------------------------------------------------------------------------------
+    //---------------------------------------------------------------------------------------
     private async Task AgregarTransaccion()
     {
         if (string.IsNullOrWhiteSpace(Glosa) || string.IsNullOrWhiteSpace(Monto))
@@ -81,13 +90,15 @@ public class MainViewModel : INotifyPropertyChanged
 
         await Shell.Current.GoToAsync("..");
     }
-
+    //---------------------------------------------------------------------------------------
+    //---------------------------------------------------------------------------------------
     private async Task CancelarTransaccion()
     {
         LimpiarFormulario();
         await Shell.Current.GoToAsync("..");
     }
-
+    //---------------------------------------------------------------------------------------
+    //---------------------------------------------------------------------------------------
     private void LimpiarFormulario()
     {
         Glosa = string.Empty;
@@ -95,7 +106,8 @@ public class MainViewModel : INotifyPropertyChanged
         Fecha = DateTime.Today;
         EsIngreso = false;
     }
-
+    //---------------------------------------------------------------------------------------
+    //---------------------------------------------------------------------------------------
     private void OnPropertyChanged([CallerMemberName] string name = "") =>
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 }

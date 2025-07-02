@@ -5,7 +5,8 @@ namespace GastosApp;
 public partial class App : Application
 {
     private readonly DatabaseService _databaseService;
-
+    //---------------------------------------------------------------------------------------
+    //---------------------------------------------------------------------------------------
     public App(DatabaseService databaseService)
     {
         InitializeComponent();
@@ -15,7 +16,8 @@ public partial class App : Application
 
         MainPage = new AppShell();
     }
-
+    //---------------------------------------------------------------------------------------
+    //---------------------------------------------------------------------------------------
     private async void CheckAndPromptForUserName()
     {
         string userName = await _databaseService.GetSettingAsync("UserName");
@@ -28,4 +30,6 @@ public partial class App : Application
             }
         }
     }
+    //---------------------------------------------------------------------------------------
+    //---------------------------------------------------------------------------------------
 }

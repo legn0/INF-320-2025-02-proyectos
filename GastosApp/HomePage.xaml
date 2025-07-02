@@ -61,7 +61,6 @@
                 </StackLayout>
             </Frame>
 
-            <!-- Contenido restante: botón, historial -->
             <VerticalStackLayout Grid.Row="2" Spacing="15">
 
                 <!-- Botón "+" -->
@@ -70,7 +69,6 @@
                         FontSize="22"
                         CornerRadius="40"
                         HorizontalOptions="End"
-                        BackgroundColor="#FF801EFF"
                         TextColor="White"
                         TranslationY="-15">
                     <Button.Shadow>
@@ -80,8 +78,7 @@
 
                 <!-- Label Transacciones -->
                 <Label Text="Transacciones" FontSize="Medium" FontAttributes="Bold" TranslationY="-30" />
-
-                <!-- Lista de transacciones -->
+                <!-- Lista de Transacciones -->
                 <CollectionView ItemsSource="{Binding Transacciones}" TranslationY="-30">
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="models:Transaccion">
@@ -111,7 +108,10 @@
                 </CollectionView>
 
             </VerticalStackLayout>
+
         </Grid>
+
     </ScrollView>
+
 </ContentPage>
                    

@@ -13,7 +13,7 @@
         Route="HomePage" />
 
     <ShellContent
-        Title="Nuevo Gasto"
+        Title="Nueva Transaccion"
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />
 
