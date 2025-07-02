@@ -1,4 +1,4 @@
-# INF-320 Proyecto 1: Color
+# INF-320 Proyecto 3: Transacciones
 
 
 Integrantes:
